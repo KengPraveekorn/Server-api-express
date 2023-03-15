@@ -13,8 +13,8 @@ const {
 router.post('/product',create)
 router.get('/product',list) // List อ่านมาทั้งหมด
 router.get('/product/:id',read) // Read สามารถอ่านแค่ method เดียวได้ เช่น อ่านจาก id (เฉพาะเจาะจง)
-router.put('/product',update)
-router.delete('/product',remove)
+router.put('/product/:id',update)
+router.delete('/product/:id',remove)
 
 
 

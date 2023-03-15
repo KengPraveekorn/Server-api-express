@@ -33,14 +33,33 @@ exports.list = async(req,res)=>{
 
 // Read สามารถอ่านแค่ method เดียวได้ เช่น อ่านจาก id (เฉพาะเจาะจง)
 exports.read = async(req,res)=>{
-    console.log('hello Read');
-    res.send('Hello Read')
+    try{
+        // code
+        console.log(req.params.id);  // params การอ่านข้อมูลมาจาก url เช่น 6411e08dc4572cb7b6a41204
+        const id = req.params.id
+        const readProduct = await Products.findOne({_id:id}).exec()  // findOne ค้นหาแค่ 1 ซึ่งค้นหาเป็น Object (_id:id) ค้นหาอะไรด้วยอะไร
+        res.json(readProduct)
+    }catch(err){
+        // err
+        console.log(err);
+        res.status(400).send('Server Read Error')
+    }
 } // async การทำงานเป็นลำดับขั้น
- 
-// Update แก้
+  
+// Update แก้ เปรียบเสมือนการใช้ read and create ร่วมกัน
 exports.update = async(req,res)=>{
-    console.log('hello Update');
-    res.send('Hello Update')
+    try{
+        // code
+        const id = req.params.id
+        const updateProduct = await Products
+        .findOneAndUpdate({_id:id},req.body,{new:true}).exec()
+        // res.json(updateProduct)
+        res.send("Update Success")
+    }catch(err){
+        // err
+        console.log(err);
+        res.status(400).send('Server Update Error')
+    }
 } // async การทำงานเป็นลำดับขั้น
 
 // Delete ลบ
