@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 
 // 3 ประสาน Middleware --> ทำฉันด้วย ทำฉันก่อน ทำฉันตลอด
 const morgan = require('morgan')
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser')  //  รับส่งข้อมูล JSON จากหน้าบ้านมาหลังบ้าน
 const cors = require('cors')
 
 const {readdirSync} = require('fs')  // เรียกใช้ func สำหรับอ่าน folder auto 
@@ -22,6 +22,7 @@ connectDB()
 
 // middleware
 app.use(morgan("dev"))
+app.use(bodyParser.json({ limit: "10mb" }))
 
 
 // วิธี Route 1
