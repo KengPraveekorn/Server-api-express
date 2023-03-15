@@ -64,6 +64,14 @@ exports.update = async(req,res)=>{
 
 // Delete ลบ
 exports.remove = async(req,res)=>{
-    console.log('hello Remove');
-    res.send('Hello Remove')
+    try{
+        // code
+        const id = req.params.id
+        const removeProduct = await Products.findOneAndDelete({_id:id}).exec()
+        res.send("Remove Success")
+    }catch(err){
+        // err
+        console.log(err);
+        res.status(400).send('Server Remove Error')
+    }
 } // async การทำงานเป็นลำดับขั้น
